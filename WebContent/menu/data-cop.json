@@ -1,0 +1,25 @@
+{
+  "TileCollection" : [
+    {
+      "icon" : "inbox",
+      "number" : "13",
+      "title" : "Anticipos",
+      "info" : "Abiertos",
+      "infoState" : "Success"     
+    },
+    {
+      "icon" : "inbox",
+      "number" : "7",
+      "title" : "Comprobaciones",
+      "info" : "Abiertos",
+      "infoState" : "Success"
+    },
+    {
+      "icon" : "travel-expense-report",
+      "number" : "281",
+      "numberUnit" : "mxn",
+      "title" : "Estado Cuenta",
+      "info" : "Saldo"
+    }
+  ]
+}

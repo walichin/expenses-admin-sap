@@ -1,0 +1,348 @@
+<core:View controllerName="com.ittumi.compgastos.comprobaciones.controller.DetailComprobacion"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:l="sap.ui.layout" xmlns:ui="sap.ca.ui" xmlns="sap.m">
+	<Page id="DetailsPage11">
+		<customHeader>
+			<Bar design="SubHeader">
+				<contentLeft>
+					<Button icon="sap-icon://nav-back" press="onNavBack"/>
+				</contentLeft>
+				<contentMiddle>
+					<Text text="Comprobación Gastos"/>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<subHeader>
+			<Bar design="Header">
+				<contentMiddle>
+					<Text id="DtCmp1" text="Detalle Comprobacion 000000451"/>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<content>
+			<IconTabBar id="idIconTabBarDetComp"
+				select="OnPressIconTabBar"
+				backgroundDesign="Transparent">
+				<items>
+					<IconTabFilter key="key1"
+						icon="img/gastos.png"
+						text="Gastos">
+							<f:SimpleForm id="comprobacionCabForm" minWidth="1024"
+							maxContainerCols="2" editable="true"
+							layout="ResponsiveGridLayout" class="editableForm"
+							labelSpanL="4" labelSpanM="2" emptySpanL="1"
+							emptySpanM="1" columnsL="1" columnsM="1" >
+								<Label text="Fecha Doc." />
+								<DatePicker id="idFechaDoc" placeholder=" " change="OnchangeFechaDoc" value="{ path: 'mComCab>/temp_CabeceraComp/Bldat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+									<layoutData>
+										<l:GridData span="L2 M2 S4" />
+									</layoutData>					
+								</DatePicker>
+								<Label text="Fecha Cont.">
+									<layoutData>
+										<l:GridData span="L2 M1 S4" />
+									</layoutData>					
+								</Label>	
+								<DatePicker id="idFechaCont" placeholder=" " change="OnchangeFechaCont" value="{ path: 'mComCab>/temp_CabeceraComp/Budat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+									<layoutData>
+										<l:GridData span="L2 M3 S4" />
+									</layoutData>					
+								</DatePicker>
+								<Label text="Estatus" />
+								<Select id="idEstatus" selectedKey="{mComCab>/temp_CabeceraComp/Status}" enabled="false"
+								 items="{path: 'mCombos>/StatusList', sorter: {path: 'mCombos>FixedValued', descending: false}}" >
+									<items>
+										<core:Item key="{mCombos>FixedValued}" text="{mCombos>FixedValued} {mCombos>DescText}"/>
+									</items>
+									<layoutData>
+										<l:GridData span="L2 M2 S4" />
+									</layoutData>						
+								</Select>
+								<Label text="Creado el">
+								<layoutData>
+										<l:GridData span="L2 M1 S4" />
+									</layoutData>					
+								</Label>	
+								<DatePicker id="idCreadoEl" placeholder=" " enabled="false"
+									value="{ path: 'mComCab>/temp_CabeceraComp/Erdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' , UTC:'true'}}">
+									<layoutData>
+										<l:GridData span="L2 M3 S4" />
+									</layoutData>					
+								</DatePicker>
+								<Label text="Aprobado por" />
+								<Input id="idAprobadoPor" placeholder=" " enabled="false" value="{mComCab>/temp_CabeceraComp/Approver}">
+									<layoutData>
+										<l:GridData span="L2 M2 S4" />
+									</layoutData>
+								</Input>
+								<Label text="Fecha Aprob.">
+									<layoutData>
+										<l:GridData span="L2 M1 S4" />
+									</layoutData>					
+								</Label>					
+								<DatePicker id="idFechaAprob" placeholder=" " enabled="false"
+									value="{ path: 'mComCab>/temp_CabeceraComp/Apprdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+									<layoutData>
+										<l:GridData span="L2 M3 S4" />
+									</layoutData>					
+								</DatePicker>
+								<Label text="Contabilizado por" />
+								<Input id="idContabilizadoPor" placeholder=" " enabled="false" value="{mComCab>/temp_CabeceraComp/Postedby}">
+									<layoutData>
+										<l:GridData span="L2 M2 S4" />
+									</layoutData>
+								</Input>
+								<Label text="Fecha Apro. Cont.">
+									<layoutData>
+										<l:GridData span="L2 M1 S4" />
+									</layoutData>					
+								</Label>					
+								<DatePicker id="idFechaAproCont" placeholder=" " enabled="false"
+									value="{ path: 'mComCab>/temp_CabeceraComp/Postdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+									<layoutData>
+										<l:GridData span="L2 M3 S4" />
+									</layoutData>					
+								</DatePicker>
+						</f:SimpleForm>
+						<Table id="idTableDetComp"  mode="SingleSelectLeft" 
+							items="{mComPos>/temp_listaPosComp}"
+							growing="true" growingScrollToLoad="false"
+							inset="false" includeItemInSelection="true">
+							<headerToolbar>
+								<Toolbar>
+									<Title id="idHeaderTableDetComp" text="Items (3)" level="H2"/>
+								</Toolbar>
+							</headerToolbar>
+							<items>
+					            <ColumnListItem>
+					                <cells>
+				                         <Text text="{mComPos>Expensetypedes}" />
+				                         <Text text="{mComPos>Expenseclassdes}"/>
+				                         <Text text="{mComPos>Wrbtr}" />
+				                         <Text text="{mComPos>Waers}" />
+				                         <Text text="{mComPos>Mwskz}" />
+				                         <Text text="{ path: 'mComPos>Bldat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}"/>
+				                         <core:Icon
+								            src="sap-icon://sys-enter-2"
+								            color="#12730D" 
+								            visible="{path: 'mComPos>Iconxml', formatter: 'util.Formatter.check_Archivo'}" >
+								            <core:layoutData>
+								             <FlexItemData growFactor="1" />
+								            </core:layoutData>
+								           </core:Icon>
+								           <core:Icon
+								            src="sap-icon://sys-enter-2"
+								            color="#12730D"
+								            visible="{path: 'mComPos>Iconpdf', formatter: 'util.Formatter.check_Archivo'}" >
+								            <core:layoutData>
+								             <FlexItemData growFactor="1" />
+								            </core:layoutData>
+								           </core:Icon>
+				                         <Button
+				                          icon="sap-icon://slim-arrow-right"
+				           				  width="20%"  press="onPressItemsSelect" />
+				                    </cells>
+					            </ColumnListItem>
+							</items>
+							<columns>
+								<Column>
+									<Text text="Tipo" />
+								</Column>
+								<Column width="30%">
+									<Text text="Clase Gastos" />
+								</Column>
+								<Column hAlign="End">
+									<Text text="Importe MD" />
+								</Column>
+								<Column>
+									<Text text="Mon" />
+								</Column>
+								<Column>
+									<Text text="Imp." />
+								</Column>
+								<Column>
+									<Text text="Fecha Doc." />
+								</Column>
+								<Column>
+									<Text text="XML" />
+								</Column>
+								<Column>
+									<Text text="PDF" />
+								</Column>
+								<Column>
+									<Text text="" />
+								</Column>
+							</columns>
+						</Table>
+						<Button id="idButAddGasto" text="Adicionar Gasto"
+							icon="sap-icon://add"
+							press="onPressAddGasto">
+						</Button>
+						<Text width="10px"/>
+						<Button id="idButDelGasto" text="Eliminar Gasto"
+							icon="sap-icon://delete"
+							press="onPressDelGasto">
+					    </Button>
+					</IconTabFilter>
+					<IconTabFilter key="key2"
+						icon="img/solicitud.png"
+						text="Solicitud">
+						<f:SimpleForm minWidth="1024" id="comprobacionPosForm"
+						maxContainerCols="2" layout="ResponsiveGridLayout"
+						labelSpanL="4" labelSpanM="2" emptySpanL="1"
+						emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+						<f:content>
+							<Label text="# Comprobación" design="Bold"/>
+							<Text  text="{mComCab>/temp_CabeceraComp/Expenseid}" >
+								<layoutData>
+									<l:GridData span="L2 M2 S4" />
+								</layoutData>															
+							</Text>
+							<Label text="Sociedad" design="Bold">
+								<layoutData>
+									<l:GridData span="L2 M1 S4" />
+								</layoutData>					
+							</Label>
+							<Text text="{mComCab>/temp_CabeceraComp/Bukrs} {mComCab>/temp_CabeceraComp/Buktx}">
+								<layoutData>
+									<l:GridData span="L2 M3 S4" />
+								</layoutData>
+							</Text>
+							<Label text="Tipo Documento" design="Bold"/>
+							<Text text="{mComCab>/temp_CabeceraComp/Expensedoc} {mComCab>/temp_CabeceraComp/Expensedocdes}">
+								<layoutData>
+									<l:GridData span="L2 M2 S4" />
+								</layoutData>
+							</Text>
+							<Label text="Estatus" design="Bold">
+								<layoutData>
+									<l:GridData span="L2 M1 S4" />
+								</layoutData>					
+							</Label>
+							<Text text="{mComCab>/temp_CabeceraComp/Status}">
+								<layoutData>
+									<l:GridData span="L2 M3 S4" />
+								</layoutData>
+							</Text>	
+							<Label text="Departamento/Sub" design="Bold"/>
+							<Text text="{mComCab>/temp_CabeceraComp/Deptxt}/{mComCab>/temp_CabeceraComp/Subdeptxt}">
+								<layoutData>
+									<l:GridData span="L2 M2 S4" />
+								</layoutData>
+							</Text>
+							<Label text="CeCo" design="Bold">
+								<layoutData>
+									<l:GridData span="L2 M1 S4" />
+								</layoutData>					
+							</Label>
+							<Text text="{mComCab>/temp_CabeceraComp/Deptkostl}">
+								<layoutData>
+									<l:GridData span="L2 M3 S4" />
+								</layoutData>
+							</Text>	
+							<Label text="Fecha Solicitud" design="Bold"/>
+							<Text text="{ path: 'mComCab>/temp_CabeceraComp/Reqexpdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+								<layoutData>
+									<l:GridData span="L2 M2 S4" />
+								</layoutData>
+							</Text>
+							<Label text="Creado el" design="Bold">
+								<layoutData>
+									<l:GridData span="L2 M1 S4" />
+								</layoutData>					
+							</Label>
+							<Text text="{ path: 'mComCab>/temp_CabeceraComp/Erdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+								<layoutData>
+									<l:GridData span="L2 M3 S4" />
+								</layoutData>
+							</Text>	
+							<Label text="Hora" design="Bold"/>
+							<Text text="{path:'mComCab>/temp_CabeceraComp/Erzet', formatter: 'util.Formatter.time'}">
+						        <layoutData>
+						         	<l:GridData span="L2 M2 S4" />
+						        </layoutData>
+					       </Text>
+							<Label text="Modificado el" design="Bold">
+								<layoutData>
+									<l:GridData span="L2 M1 S4" />
+								</layoutData>					
+							</Label>
+							<Text text="{ path: 'mComCab>/temp_CabeceraComp/Aedat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">
+								<layoutData>
+									<l:GridData span="L2 M3 S4" />
+								</layoutData>
+							</Text>	
+							<TextArea value="{mComCab>/temp_CabeceraComp/Comment}" 
+								 rows="3" cols="20" width="100%" editable="false" />
+							</f:content>	
+						</f:SimpleForm>
+					</IconTabFilter>
+					<IconTabFilter key="key3"
+						icon="img/presupuesto.png"
+						text="Presupuesto">
+						<Table id="idTablePresup"
+							items="{mTables>/PresupuestosList}">
+							<items>
+					            <ColumnListItem>
+					                <cells>
+				                         <Text text="{mTables>Hkont}" />
+				                         <Text text="{mTables>Txt20}"/>
+				                         <Text text="{mTables>Prctr}" />
+				                         <Text text="{mTables>Ktext}" />
+				                         <Text text="{mTables>Dmbtr}" />
+				                         <Text text="{mTables>BudgetDmbtr}" />
+				                         <Text text="{mTables>RealDmbtr}" />
+				                         <Text text="{mTables>AvailableDmbtr}" />
+				                    </cells>
+					            </ColumnListItem>
+							</items>
+							<columns>
+								<Column hAlign="End">
+									<Text text="Cuenta" />
+								</Column>
+								<Column>
+									<Text text="Descripción Cuenta" />
+								</Column>
+								<Column>
+									<Text text="CeBe" />
+								</Column>
+								<Column>
+									<Text text="Descripción CeBe" />
+								</Column>
+								<Column hAlign="Center">
+									<Text text="Base ML" />
+								</Column>
+								<Column hAlign="End">
+									<Text text="Presupuesto ML" />
+								</Column>
+								<Column hAlign="End">
+									<Text text="Real ML" />
+								</Column>
+								<Column hAlign="End">
+									<Text text="Disponible ML" />
+								</Column>
+							</columns>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button id="idButSave" type="Default" text="Grabar" press="saveComprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Salir" press="exitDetailComprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

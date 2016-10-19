@@ -1,0 +1,33 @@
+{
+  "TileCollection" : [
+    {
+      "icon" : "money-bills",
+      "number" : "",
+      "title" : "Anticipos",
+      "info" : "",
+      "infoState" : "Success"     
+    },
+    {
+      "icon" : "inbox",
+      "number" : "",
+      "title" : "Comprobaciones",
+      "info" : "",
+      "infoState" : "Success"
+    },
+    {
+      "icon" : "customer-financial-fact-sheet",
+      "number" : "",
+      "numberUnit" : "",
+      "title" : "Estado Cuenta",
+      "info" : ""
+    },
+    {
+      "icon" : "customer-financial-fact-sheet",
+      "number" : "",
+      "numberUnit" : "",
+      "title" : "Presupuesto",
+      "info" : ""
+    }
+    
+  ]
+}

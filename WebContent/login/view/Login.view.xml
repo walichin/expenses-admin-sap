@@ -1,0 +1,38 @@
+<mvc:View height="100%" controllerName="com.ittumi.compgastos.login.controller.Login"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+	<Page showHeader="false" enableScrolling="false">
+		<Panel>
+			<FlexBox height="500px" alignItems="Center" justifyContent="Center">
+				<items>
+					<f:SimpleForm id="solicitudForm1" maxContainerCols="1"
+						editable="true" layout="ResponsiveGridLayout" title="" labelSpanL="4"
+						labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1"
+						columnsM="1" class="editableForm">
+						<f:content>
+							<Image
+								src="img/logo_ittumi.jpg"
+								densityAware="false"
+								width="100%" >
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+							</Image>
+							<Label text="User">
+							</Label>
+							<Input id="myUser" value="">
+							</Input>
+							<Label text="Password"></Label>
+							<Input type="Password" id="myPassword" value="" change="onPasswordChange">
+							</Input>
+							<Button text="Login" press="onPress">
+							</Button>
+						</f:content>
+					</f:SimpleForm>
+				</items>
+			</FlexBox>
+		</Panel>
+	</Page>
+</mvc:View>
+
+                

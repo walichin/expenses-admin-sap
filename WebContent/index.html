@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+		<script src="https://sapui5.hana.ondemand.com/1.32.9/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m"
+				data-sap-ui-theme="sap_bluecrystal"
+				data-sap-ui-xx-bindingSyntax="complex"
+				data-sap-ui-compatVersion="edge"
+				data-sap-ui-resourceroots='{
+					"com.ittumi.compgastos.anticipos": "./anticipos",
+					"com.ittumi.compgastos.comprobaciones": "./comprobaciones",
+					"com.ittumi.compgastos.estadocuenta": "./estadocuenta",
+					"com.ittumi.compgastos.presupuesto": "./presupuesto",
+					"com.ittumi.compgastos.menu": "./menu",
+					"com.ittumi.compgastos.login": "./login"
+				}'>
+		</script>    
+		
+		<link rel="stylesheet" type="text/css" href="css/style.css" /> 
+     
+		<script>
+			sap.ui.localResources("util");
+			sap.ui.localResources("img");			
+			var shell = new sap.m.Shell("shell", {
+				title:'SAPUI5 Expense Management',
+				showLogout: true // ?
+			});
+			shell.placeAt('content');	
+
+			var loginApp = new sap.ui.core.ComponentContainer("LoginContainer",{
+				name : 'com.ittumi.compgastos.login'
+			});
+			
+			var menuApp = new sap.ui.core.ComponentContainer("MenuContainer",{
+				name : 'com.ittumi.compgastos.menu'
+			});
+			
+			var anticiposApp = new sap.ui.core.ComponentContainer("AnticiposContainer",{
+				name : 'com.ittumi.compgastos.anticipos'
+			});
+
+			var comprobacionesApp = new sap.ui.core.ComponentContainer("ComprobacionesContainer",{
+				name : 'com.ittumi.compgastos.comprobaciones'
+			});
+
+			var estadocuentaApp = new sap.ui.core.ComponentContainer("EstadoCuentaContainer",{
+				name : 'com.ittumi.compgastos.estadocuenta'
+			});
+			
+			var presupuestoApp = new sap.ui.core.ComponentContainer("PresupuestoContainer",{
+				name : 'com.ittumi.compgastos.presupuesto'
+			});			
+			
+			var oRouter = new sap.ui.core.routing.Router();
+			oRouter.addRoute({
+				pattern: "",
+				name: "_login",
+				callback: function() {
+					shell.setApp(loginApp);
+				}
+			});
+			oRouter.addRoute({
+				pattern: "menu",
+				name: "_menu",
+				callback: function() {
+					shell.setApp(menuApp);
+				}
+			});
+			oRouter.addRoute({
+				pattern: "anticipos",
+				name: "_anticipos",
+				callback: function() {
+					shell.setApp(anticiposApp);
+				}
+			});
+			oRouter.addRoute({
+				pattern: "comprobaciones",
+				name: "_comprobaciones",
+				callback: function() {
+					shell.setApp(comprobacionesApp);
+				}
+			});				
+			oRouter.addRoute({
+				pattern: "estadocuenta",
+				name: "_estadocuenta",
+				callback: function() {
+					shell.setApp(estadocuentaApp);
+				}
+			});				
+			oRouter.addRoute({
+				pattern: "presupuesto",
+				name: "_presupuesto",
+				callback: function() {
+					shell.setApp(presupuestoApp);
+				}
+			});							
+			oRouter.register("app");
+			oRouter.initialize();			
+			
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

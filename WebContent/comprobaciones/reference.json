@@ -1,0 +1,55 @@
+{
+	"SociedadList": [
+		{
+			"Bukrs": "",
+			"Name": "----- Todos -----"
+		},
+		{
+			"Bukrs": "1000",
+			"Name": "1000 Joyas Plaza Galerias, S.A"
+		},		
+		{
+			"Bukrs": "2000",
+			"Name": "2000 Joyería Guvier Sur,SA CV"
+		},
+		{
+			"Bukrs": "3000",
+			"Name": "3000 Armonia y Distinción, S.A"
+		},
+		{
+			"Bukrs": "4000",
+			"Name": "4000 Grupo Bogue Internacional"
+		}
+	], 		
+	"StatusComprobacionList": [
+   		{
+			"Key": "00",
+			"Name": "Todos"
+		},                 
+		{
+			"Key": "01",
+			"Name": "01 Pendiente"
+		},
+		{
+			"Key": "02",
+			"Name": "02 Aprobación"
+		},
+		{
+			"Key": "03",
+			"Name": "03 Aprobado"
+		},
+		{
+			"Key": "04",
+			"Name": "04 Rechazado"
+		},
+		{
+			"Key": "05",
+			"Name": "05 Contabilizado"
+		},
+		{
+			"Key": "06",
+			"Name": "06 Anulado"
+		}
+	]
+	
+}

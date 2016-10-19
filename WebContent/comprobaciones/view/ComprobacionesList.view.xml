@@ -1,0 +1,152 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" 
+	xmlns:c="sap.ui.core" controllerName="com.ittumi.compgastos.comprobaciones.controller.ComprobacionesList"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showHeader="true" enableScrolling="true" title="Comprobaciones"
+		showNavButton="true" navButtonPress="onNavBack" class="sapUiResponsiveContentPadding">
+		<headerContent>
+			<Text text="User:"/><Text text="{context>/userName}"/>
+			<Button icon="sap-icon://action" text="Logout" tooltip="Logout" press="onLogout"/>
+		</headerContent>
+				
+		<content>
+			<fb:FilterBar id ="myFilterBar" reset="onReset" search="onSearch" filterBarExpanded="false">
+				<fb:filterItems>
+					<fb:FilterItem name="sociedadFilter" label="Sociedad">
+						<fb:control>
+							<ComboBox id="sociedadBox" 
+								items="{path: 'reference>/SociedadList', sorter: {path: 'reference>Bukrs', descending: false}}"
+								selectedKey="{path:'params>/bukrs'}">
+								<core:Item id="sociedadBoxItem" key="{reference>Bukrs}" text="{reference>Butxt}"/>
+							</ComboBox>
+						</fb:control>		
+					</fb:FilterItem>				
+					<fb:FilterItem name="statusComprobacionFilter" label="Status Anticipo">
+						<fb:control>
+							<ComboBox id="statusComprobacionBox" 
+								items="{path: 'reference>/StatusComprobacionList', sorter: {path: 'reference>DescText', descending: false}}" 
+								selectedKey="{path:'params>/status'}">
+								<core:Item id="statusAnticipoBoxItem" key="{reference>FixedValued}" text="{reference>DescText}"/>
+							</ComboBox>
+						</fb:control>			
+					</fb:FilterItem>
+					<fb:FilterItem name="dateRangeFilter" label="Date Range" mandatory="true">
+						<fb:control>
+							<DateRangeSelection id="dateRangeBox"
+								delimiter="{path:'params>/rangeDelimiterDRS1'}"
+								dateValue="{path:'params>/rangeDateValueDRS1'}"
+								secondDateValue="{path:'params>/rangeSecondDateValueDRS1'}"
+								displayFormat="{path:'params>/rangeDateFormatDRS1'}"
+							 >								 
+							</DateRangeSelection>
+						</fb:control>
+					</fb:FilterItem>	
+				</fb:filterItems>
+			</fb:FilterBar>
+			<Table noDataText="No Data" id="ExpenseListTable" mode="SingleSelectLeft"
+				items="{comprobaciones>/ListExpenseSet}"
+				growing="true"  growingScrollToLoad="false" growingThreshold="10" 
+				class="navTableControlLayout">
+		        <items>
+		            <ColumnListItem counter="0" id="__item0" type="Navigation" press="onPressItemSelect">
+		                <cells>
+		                    <Text text="{comprobaciones>Expenseid}" maxLines="0" id="__text0"/>
+		                    <Text text="{comprobaciones>Texpensedoc}" maxLines="0" id="__text1"/>
+		                    <Text text="{ path: 'comprobaciones>Reqexpdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" maxLines="0" id="__text2"/>
+		                    <!-- <Text text="{comprobaciones>Dmbtr}" maxLines="0" id="__text0_copy3"/> -->
+		                    <Text text="{ path: 'comprobaciones>Dmbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}" maxLines="0" id="__text0_copy3"/>
+		                    <!-- <Text text="{comprobaciones>Appdmbtr}" maxLines="0" id="__text0_copy4"/> -->
+		                    <Text text="{ path: 'comprobaciones>Appdmbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}" maxLines="0" id="__text0_copy4"/>
+		                    <!-- <Text text="{comprobaciones>Saldo}" maxLines="0" id="__text0_copy5"/> -->
+		                    <Text text="{ path: 'comprobaciones>Saldo', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}" maxLines="0" id="__text0_copy5"/>
+		                    <Text text="{comprobaciones>EstatusC}" maxLines="0" id="__text0_copy6"/>
+							<Text text="{comprobaciones>Approver}" maxLines="0" id="__text4_copy7"/>              
+							<Text text="{ path: 'comprobaciones>Apprdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" maxLines="0" id="__text4_copy8"/> 
+							<Text text="{comprobaciones>Postedby}" maxLines="0" id="__text4_copy9"/>
+							<Text text="{ path: 'comprobaciones>Postdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" maxLines="0" id="__text4_copy10"/>		                    
+<!-- 		                    <m:ObjectIdentifier title="{comprobaciones>Approver}" text="{ path: 'comprobaciones>Apprdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yy' }}"></m:ObjectIdentifier>
+		                    <m:ObjectIdentifier title="{comprobaciones>Postedby}" text="{ path: 'comprobaciones>Postdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yy' }}"></m:ObjectIdentifier> -->
+		                    <!-- <Button
+		                    	icon="sap-icon://slim-arrow-right"
+								width="20%"  press="onPressItemSelect" />  -->
+		                    </cells>
+		            </ColumnListItem>
+				</items>
+				<columns>
+					<Column width="8%">
+						<m:Label text="#Comprob" />
+					</Column>
+					<Column width="10%">
+						<m:Label text="Tipo Docum." />
+					</Column>
+					<Column width="8%">
+						<m:Label text="Fec. Solictud" />
+					</Column>				
+					<Column width="8%" hAlign="End">
+						<m:Label text="Importe MN" />
+					</Column>
+					<Column width="7%" hAlign="End">
+						<m:Label text="Anticipo" />
+					</Column>
+					<Column width="7%" hAlign="End">
+						<m:Label text="Saldo" />
+					</Column>
+					<Column width="auto">
+						<m:Label text="Status Comprobacion" />
+					</Column>
+					<Column width="8%">
+						<m:Label text="Aprobado por" />
+					</Column>
+					<Column width="7%">
+						<m:Label text="Fecha Aprob." />
+					</Column>
+					<Column width="8%">
+						<m:Label text="Contabiliz. por" />
+					</Column>
+					<Column width="7%">
+						<m:Label text="Fec. Contab." />
+					</Column>
+					<!-- <Column width="7%">
+						<m:Label text="" />
+					</Column> -->
+				</columns>
+            </Table>			
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button type="Default" text="Crear Solicitud" press="crearSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Modificar Solicitud" press="modificarSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Consultar Solicitud" press="consultarSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Anular Comprobacion" press="anularComprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+					
+				</Button>
+				<Button type="Default" text="Enviar Aprobacion" press="enviarAprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

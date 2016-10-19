@@ -1,0 +1,195 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:c="sap.ui.core" controllerName="com.ittumi.compgastos.anticipos.controller.AnticiposList"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showHeader="true" enableScrolling="true" title="Anticipos"
+		showNavButton="true" navButtonPress="onNavBack" >
+		<headerContent>
+			<Text text="User:"/><Text text="{context>/userName}"/>
+			<Button icon="sap-icon://action" text="Logout" tooltip="Logout" press="onLogout"/>
+		</headerContent>		
+		<content>
+		<fb:FilterBar id ="myFilterBar" reset="onReset" search="onSearch" filterBarExpanded="false">
+			<fb:filterItems>
+				<fb:FilterItem name="sociedadFilter" label="Sociedad">
+					<fb:control>
+						<ComboBox id="sociedadBox" 
+							items="{path: 'reference>/SociedadList', sorter: {path: 'reference>Bukrs', descending: false}}"
+							selectedKey="{path:'params>/bukrs'}">
+							<core:Item id="sociedadBoxItem" key="{reference>Bukrs}" text="{reference>Butxt}"/>
+						</ComboBox>
+					</fb:control>			
+				</fb:FilterItem>				
+				<fb:FilterItem name="statusAnticipoFilter" label="Status Anticipo">
+					<fb:control>
+						<ComboBox id="statusAnticipoBox" 
+							items="{path: 'reference>/StatusAnticipoList', sorter: {path: 'reference>DescText', descending: false}}" 
+							selectedKey="{path:'params>/status'}">
+							<core:Item id="statusAnticipoBoxItem" key="{reference>FixedValued}" text="{reference>DescText}"/>
+						</ComboBox>
+					</fb:control>			
+				</fb:FilterItem>
+				<fb:FilterItem name="dateRangeFilter" label="Rango Fecha Solicitud" mandatory="true">
+					<fb:control>
+						<DateRangeSelection id="dateRangeBox"
+							delimiter="{path:'params>/rangeDelimiterDRS1'}"
+							dateValue="{path:'params>/rangeDateValueDRS1'}"
+							secondDateValue="{path:'params>/rangeSecondDateValueDRS1'}"
+							displayFormat="{path:'params>/rangeDateFormatDRS1'}"
+						 >								 
+						</DateRangeSelection>
+					</fb:control>
+				</fb:FilterItem>	
+			</fb:filterItems>
+		</fb:FilterBar>
+		<!-- Items {path:'anticipos>/ListAdvanceSet',formatter:'com.ittumi.compgastos.anticipos.Formatter.total'}  -->
+	    <Table 
+	     noDataText="No Data" 
+	     id="AdvancesListTable"
+	     headerText="" footerText="" items="{anticipos>/ListAdvanceSet}" mode="SingleSelectLeft"
+	     growing="true" growingScrollToLoad="false" class="navTableControlLayout" growingThreshold="10">
+        <items>
+            <ColumnListItem counter="0" id="__item0" type="Navigation" press="modificarAnticipo">
+                <cells>
+                    <Text text="{anticipos>Expenseid}" maxLines="0" id="__text0"/>
+                    <Text text="{anticipos>Reqlin}" maxLines="0" id="__text1"/>
+                    <Text text="{ path: 'anticipos>Reqexpdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" maxLines="0" id="__text2" wrapping="true"/>
+<!--                     <Text text="{ path: 'anticipos>Bldat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yy' }}" maxLines="0" id="__text4"/> -->
+<!--                     <Text text="{ path: 'anticipos>Erdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0" id="__text4_copy"/> -->
+                    <!-- <Text text="{anticipos>Wrbtr}" maxLines="0" id="__text4_copy2"/> -->
+                    <Text text="{ path: 'anticipos>Wrbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.' }}" maxLines="0" id="__text4_copy2"/>
+                    <Text text="{anticipos>Waers}" maxLines="0" id="__text4_copy3"/>
+<!--                     <Text text="{anticipos>Kursf}" maxLines="0" id="__text4_copy4"/> -->
+                    <!-- <Text text="{anticipos>Dmbtr}" maxLines="0" id="__text4_copy5"/> -->
+                    <Text text="{ path: 'anticipos>Dmbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}" maxLines="0" id="__text4_copy5"/>
+                    <Text text="{anticipos>EstatusA}" maxLines="0" id="__text4_copy6"/>
+<!--                     <ObjectIdentifier
+						title="{anticipos>Approver}"
+						text="{ path: 'anticipos>Apprdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
+                    <ObjectIdentifier
+						title="{anticipos>Postedby}"
+						text="{ path: 'anticipos>Postdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>       -->
+					<Text text="{anticipos>Approver}" maxLines="0" id="__text4_copy9"/>              
+					<Text text="{ path: 'anticipos>Apprdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" maxLines="0" id="__text4_copy8"/> 
+					<Text text="{anticipos>Postedby}" maxLines="0" id="__text4_copy10"/>
+					<Text text="{ path: 'anticipos>Postdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" maxLines="0" id="__text4_copy11"/>
+				</cells>
+            </ColumnListItem>
+        </items>
+        <columns>
+            <Column width="auto" id="__column0">
+                <header>
+                    <Label text="#Comprob" id="__label0"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column1">
+                <header>
+                    <Label text="#Antic" id="__label1"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column2">
+                <header>
+                    <Label text="Fec Solic." id="__label2"/>
+                </header>
+            </Column>
+<!--             <Column id="__column0_copy2">
+                <header>
+                    <Label text="Fec Docum"/>
+                </header>
+            </Column>
+-->
+<!--             <Column width="7%" id="__column0_copy3">
+                <header>
+                    <Label text="Creado el"/>
+                </header>
+            </Column> -->
+            <Column width="auto" id="__column0_copy4" hAlign="Right">
+                <header>
+                    <Label text="Importe MD"/>
+                </header>
+            </Column>
+             <Column width="auto" id="__column0_copy5">
+                <header>
+                    <Label text="Mon"/>
+                </header>
+            </Column>
+<!--             <Column id="__column0_copy6">
+                <header>
+                    <Label text="Tip Cambio"/>
+                </header>
+            </Column> -->
+            <Column width="auto" id="__column0_copy7" hAlign="Right">
+                <header>
+                    <Label text="Importe ML"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column0_copy8">
+                <header>
+                    <Label text="Status Anticipo"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column0_copy9">
+                <header>
+                    <Label text="Aprobado Por"/>
+                </header>
+            </Column>
+             <Column width="auto" id="__column0_copy10">
+                <header>
+                    <Label text="Fec Aproba"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column0_copy11">
+                <header>
+                    <Label text="Pagado por"/>
+                </header>
+            </Column>
+             <Column width="auto" id="__column0_copy12">
+                <header>
+                    <Label text="Fecha Pago"/>
+                </header>
+            </Column>
+            </columns></Table>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button type="Default" text="Crear Solicitud" press="crearSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Modificar Solicitud" press="modificarSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>				
+				<Button type="Default" text="Consultar Solicitud" press="consultarSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Crear Anticipo" press="crearAnticipo">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Anular Anticipo" press="anularAnticipo">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Enviar Aprobacion" press="enviarAprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

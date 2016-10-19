@@ -1,0 +1,149 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:c="sap.ui.core" controllerName="com.ittumi.compgastos.estadocuenta.controller.EstadoCuentaList"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showHeader="true" enableScrolling="true" title="Estado de Cuenta"
+		showNavButton="true" navButtonPress="onNavBack" class="sapUiResponsiveContentPadding">
+		<headerContent>
+			<Text text="User:"/><Text text="{context>/userName}"/>
+			<Button icon="sap-icon://action" text="Logout" tooltip="Logout" press="onLogout"/>
+		</headerContent>		
+		<content>
+			<fb:FilterBar id ="myFilterBar" reset="onReset" search="onSearch" filterBarExpanded="false">
+				<fb:filterItems>
+					<fb:FilterItem name="sociedadFilter" label="Sociedad">
+						<fb:control>
+							<ComboBox id="sociedadBox" 
+								items="{path: 'reference>/SociedadList', sorter: {path: 'reference>Bukrs', descending: false}}"
+								selectedKey="{path:'params>/bukrs'}">
+								<core:Item id="sociedadBoxItem" key="{reference>Bukrs}" text="{reference>Butxt}"/>
+							</ComboBox>
+						</fb:control>			
+					</fb:FilterItem>					
+				</fb:filterItems>
+			</fb:FilterBar>
+			<IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" backgroundDesign="Transparent" applyContentPadding="false"
+				class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter text="Partidas Abiertas">
+					<Table noDataText="No Data" id="ListOpenTable" items="{estadocuenta>/ListOpenItemsSet}"
+						growing="true" growingScrollToLoad="false" class="navTableControlLayout" growingThreshold="10">
+				        <items>
+				            <ColumnListItem counter="0" id="__item0">
+				                <cells>
+				                    <Text text="{estadocuenta>Belnr}" maxLines="0" id="__text0"/>
+				                    <Text text="{estadocuenta>Buzei}" maxLines="0" id="__text1"/>
+				                    <Text text="{estadocuenta>Blart}" maxLines="0" id="__text2"/>
+				                    <Text text="{ path: 'estadocuenta>Budat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0" id="__text3"/>
+				                    <Text text="{ path: 'estadocuenta>Zfbdt', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0" id="__text4"/>
+				                    <Text text="{estadocuenta>Xblnr}" maxLines="0" id="__text0_copy5"/>
+				                    <Text text="{estadocuenta>Wrbtr}" maxLines="0" id="__text0_copy6"/>
+				                    <Text text="{estadocuenta>Waers}" maxLines="0" id="__text0_copy7"/>
+				                    <Text text="{estadocuenta>Dmbtr}" maxLines="0" id="__text0_copy8"/>
+				                    <Text text="{estadocuenta>Augbl}" maxLines="0" id="__text0_copy9"/>
+				                    <Text text="{ path: 'estadocuenta>Augdt', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0" id="__text0_copy10"/></cells>
+				            </ColumnListItem>
+				        </items>
+						<columns>
+							<Column width="2.5rem">
+								<m:Label text="#Documento" />
+							</Column>
+							<Column width="1.5rem">
+								<m:Label text="Item" />
+							</Column>					
+							<Column width="2rem">
+								<m:Label text="CD" />
+							</Column>
+							<Column width="2.5rem">
+								<m:Label text="Fec. Contab." />
+							</Column>
+							<Column width="2.5rem">
+								<m:Label text="Fec. Venci." />
+							</Column>				
+							<Column width="2.5rem">
+								<m:Label text="Referencia" />
+							</Column>				
+							<Column width="2rem" hAlign="Q">
+								<m:Label text="Importe MD" />
+							</Column>
+							<Column width="2rem" hAlign="End">
+								<m:Label text="Mon" />
+							</Column>
+							<Column width="2rem">
+								<m:Label text="Importe ML" />
+							</Column>
+							<Column width="2rem">
+								<m:Label text="Doc. Pago" />
+							</Column>
+		 					<Column width="2.5rem">
+								<m:Label text="Fec. Pago" />
+							</Column>
+						</columns>
+					</Table>
+					</IconTabFilter>
+					<IconTabFilter text="Partidas Cerradas">
+					<Table noDataText="No Data" id="ListClearedTable" items="{estadocuenta>/ListClearedItemsSet}"
+						growing="true" growingScrollToLoad="false" class="navTableControlLayout" growingThreshold="10">
+				        <items>
+				            <ColumnListItem counter="0">
+				                <cells>
+				                    <Text text="{estadocuenta>Belnr}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Buzei}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Blart}" maxLines="0"/>
+				                    <Text text="{ path: 'estadocuenta>Budat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0"/>
+				                    <Text text="{ path: 'estadocuenta>Zfbdt', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Xblnr}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Wrbtr}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Waers}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Dmbtr}" maxLines="0"/>
+				                    <Text text="{estadocuenta>Augbl}" maxLines="0"/>
+				                    <Text text="{ path: 'estadocuenta>Augdt', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" maxLines="0"/></cells>
+				            </ColumnListItem>
+				        </items>
+						<columns>
+							<Column width="2.5rem">
+								<m:Label text="#Documento" />
+							</Column>
+							<Column width="1.5rem">
+								<m:Label text="Item" />
+							</Column>					
+							<Column width="2rem">
+								<m:Label text="CD" />
+							</Column>
+							<Column width="2.5rem">
+								<m:Label text="Fec. Contab." />
+							</Column>
+							<Column width="2.5rem">
+								<m:Label text="Fec. Venci." />
+							</Column>				
+							<Column width="2.5rem">
+								<m:Label text="Referencia" />
+							</Column>				
+							<Column width="2rem" hAlign="Q">
+								<m:Label text="Importe MD" />
+							</Column>
+							<Column width="2rem" hAlign="End">
+								<m:Label text="Mon" />
+							</Column>
+							<Column width="2rem">
+								<m:Label text="Importe ML" />
+							</Column>
+							<Column width="2rem">
+								<m:Label text="Doc. Pago" />
+							</Column>
+		 					<Column width="2.5rem">
+								<m:Label text="Fec. Pago" />
+							</Column>
+						</columns>
+					</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>			
+			
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

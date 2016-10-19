@@ -1,0 +1,282 @@
+<core:View controllerName="com.ittumi.compgastos.anticipos.controller.DetailAnticipo"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:l="sap.ui.layout" xmlns:ui="sap.ca.ui" xmlns="sap.m">
+<!-- 	<Page id="DetailsPage11" navButtonPress="onNavBack" showNavButton="true" title="Detalle Anticipo"> -->
+	<Page id="DetailsPage11" title="Detalle Anticipo">	
+		<content>
+			<f:SimpleForm id="solicitudForm" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Datos Solicitud" labelSpanL="4" labelSpanM="2" emptySpanL="1"
+				emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+				<f:content>
+					<!-- row 1 -->
+					<Label text="# Comprobacion"></Label>
+<!--				<Input id="comprobacion" value="{anticipos>Expenseid}" enabled="{helper>/comprobacionEnabled}" change="onChange">-->
+					<Input id="comprobacion" value="{anticipos>Expenseid}" enabled="false">					
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>															
+					</Input>
+					<Label text="Departamento/Sub">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Input value="{anticipos>Deptxt}/{anticipos>Subdeptxt}" enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Centro Coste">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>
+					</Label>
+					<Input value="{anticipos>Deptkostl}" enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<!-- row 2 -->
+					<Label text="Creado el"></Label>
+					<Input id="creadoElBox" value="{path:'anticipos>Erdat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+						enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>					
+					<Input value="{path:'anticipos>Erzet', formatter:'com.ittumi.compgastos.anticipos.Formatter.time'}" enabled="false">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Modificado el">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Input value="{path:'anticipos>Aedat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+						enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>					
+					<!-- row 3 -->
+					<Label text="Sociedad"></Label>
+					<ComboBox id="sociedadBox" 
+						items="{path: 'reference>/SociedadList', sorter: {path: 'reference>Butxt', descending: false}}" 
+						selectedKey="{path:'anticipos>Bukrs'}" enabled="false">
+						<core:Item id="sociedadBoxItem" key="{reference>Bukrs}" text="{reference>Butxt}"/>
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>	
+					</ComboBox>
+					<Label text="Tipo Documento">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<ComboBox id="tipoDocumentoBox" 
+						items="{path: 'reference>/TipoDocumentoList', sorter: {path: 'reference>Expensedocdesc', descending: false}}" 
+						selectedKey="{path:'anticipos>Expensedoc'}" enabled="false">
+						<core:Item id="tipoDocumentoBoxItem" key="{reference>Expensedoc}" text="{reference>Expensedocdesc}"/>
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>	
+					</ComboBox>
+					<Label text="Fecha Solicitud">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<DatePicker id="fechaSolicitudBox" value="{path:'anticipos>Reqexpdat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+						enabled="false">			
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text=""></Label>
+					<TextArea id="comment" value="{anticipos>Comment}" rows="4" enabled="false">
+						<layoutData>
+							<l:GridData span="L8 M8 S4" />
+						</layoutData>						
+					</TextArea>	
+				</f:content>
+			</f:SimpleForm>			
+			<f:SimpleForm id="anticipoForm" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Datos Anticipo" labelSpanL="3" labelSpanM="2" emptySpanL="1"
+				emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+				<Label text="# Anticipo" />
+				<Input id="Reqlin" value="{anticipos>Reqlin}" enabled="false">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Estatus">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+<!-- 				<ComboBox id="statusAnticipoBox" 
+					items="{path: 'reference>/StatusAnticipoList', sorter: {path: 'reference>DescText', descending: false}}" 
+					selectedKey="{path:'anticipos>Status'}" enabled="{helper>/newAnticipo}"> -->
+				<ComboBox id="statusAnticipoBox" 
+					items="{path: 'reference>/StatusAnticipoList', sorter: {path: 'reference>DescText', descending: false}}" 
+					selectedKey="{path:'anticipos>Status'}" enabled="false">					
+					<core:Item id="statusAnticipoBoxItem" key="{reference>FixedValued}" text="{reference>DescText}"/>
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</ComboBox>		
+				<Label text="Creado el">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<Input value="{path:'anticipos>Erdat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+					enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>				
+				<Label text="Importe" />
+				<Input id="importe" value="{ path: 'anticipos>Wrbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}"
+					enabled="{helper>/writeMode}">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Moneda">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>				
+				<ComboBox id="tipoMonedaBox" 
+					items="{path: 'reference>/CurrencyList', sorter: {path: 'reference>Ltext', descending: false}}" 
+					selectedKey="{path:'anticipos>Waers'}" enabled="{helper>/writeMode}">
+					<core:Item id="tipoMonedaBoxItem" key="{reference>Waers}" text="{reference>Ltext}"/>
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</ComboBox>					
+				<Label text="Importe ML">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<Input enabled="false" value="{ path: 'anticipos>Dmbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Fecha Doc." />
+				<DatePicker placeholder=" " id="fechadocBox" value="{path:'anticipos>Bldat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+					enabled="{helper>/writeMode}">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>					
+				</DatePicker>					
+				<Label text="Fecha Cont.">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<DatePicker placeholder=" " id="fechacontBox" value="{path:'anticipos>Budat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+					enabled="{helper>/writeMode}">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>					
+				</DatePicker>
+				<Label text="Tipo Cambio">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+<!-- 				<Input enabled="{helper>/updAnticipo}" value="{ path: 'anticipos>Kursf', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}"> -->
+				<Input enabled="false" value="{ path: 'anticipos>Kursf', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.'  }}">				
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Aprobado por" />
+				<Input value="{anticipos>Approver}" enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Fecha Aprob.">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<Input value="{path:'anticipos>Apprdate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+					enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>				
+				<Label text="Doc. Anticipo">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<Input value="{anticipos>Belnr}" enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Contabilizado por" />
+				<Input value="{anticipos>Postedby}" enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Fec. Aprob. Con.">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<Input value="{path:'anticipos>Postdate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+					enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>					
+				<Label text="Doc. Pago">
+					<layoutData>
+						<l:GridData span="L1 M1 S4" />
+					</layoutData>
+				</Label>
+				<Input value="{anticipos>Vbelnr}" enabled="false">
+					<layoutData>
+						<l:GridData span="L2 M2 S4" />
+					</layoutData>
+				</Input>
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button type="Default" text="Grabar" press="saveAnticipo" enabled="{helper>/writeMode}">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+<!-- 				<Button type="Default" text="Reset" press="resetAnticipo"> -->
+<!-- 					<layoutData> -->
+<!-- 						<OverflowToolbarLayoutData -->
+<!-- 							moveToOverflow="false" /> -->
+<!-- 					</layoutData> -->
+<!-- 				</Button> -->
+				<Button type="Default" text="Salir" press="exitAnticipo">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

@@ -1,0 +1,203 @@
+<core:View controllerName="com.ittumi.compgastos.anticipos.controller.DetailAnticipo"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:l="sap.ui.layout" xmlns:ui="sap.ca.ui" xmlns="sap.m">
+	<Page id="DetailsPage11" navButtonPress="onNavBack" showNavButton="true"
+		title="Detalle Anticipo">
+		<content>
+			<f:SimpleForm id="solicitudForm" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Datos Solicitud" labelSpanL="4" labelSpanM="2" emptySpanL="1"
+				emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+				<f:content>
+					<Label text="# Comprobacion">									
+					</Label>
+					<Text text="{ProductName}">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>															
+					</Text>
+					<Label text="Sociedad">
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Input value="1000 Sociedad 1000">
+						<layoutData>
+							<l:GridData span="L2 M3 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Tipo Documento" />
+					<Input value="01 Gasto Viaje">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Estatus">
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Input value="01 Pendiente">
+						<layoutData>
+							<l:GridData span="L2 M3 S4" />
+						</layoutData>
+					</Input>					
+
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm id="anticipoForm" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Datos Anticipo" labelSpanL="3" labelSpanM="2" emptySpanL="1"
+				emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+					<Label text="# Anticipo" />
+					<Input value="0001">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Estatus">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Select>
+						<items>
+							<core:Item text="01 Pendiente" />
+						</items>
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>						
+					</Select>	
+					<Label text="Creado el">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>										
+					</Label>
+					<DatePicker value="">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text="Importe" />
+					<Input value="1,000.00">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Select>
+						<items>
+							<core:Item text="USD Dolares" />
+						</items>
+						<layoutData>
+							<l:GridData span="L2 M3 S4" />
+						</layoutData>						
+					</Select>
+					<Label text="Importe ML">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Input value="18,000">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Fecha Doc." />
+					<DatePicker value="">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text="Fecha Cont.">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<DatePicker value="">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text="Tipo Cambio" >
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<Input value="18.000">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Aprobado por" />
+					<Input value="PGarcia">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Fecha Aprob.">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<DatePicker value="">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text="Doc. Anticipo" >
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<Input value="9999999999">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>	
+					<Label text="Contabilizado por" />
+					<Input value="PGarcia">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Fec. Aprob. Con.">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<DatePicker value="">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text="Doc. Pago" >
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<Input value="9999999999">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>	
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button type="Default" text="Grabar" press="saveAnticipo">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Salir" press="exitAnticipo">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

@@ -1,0 +1,42 @@
+<core:View height="100%"
+	controllerName="com.ittumi.compgastos.menu.controller.Menu"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m">	
+	<Page showHeader="true" title="Comprobación Gastos" showNavButton="false" enableScrolling="false">
+		<!-- 
+		<headerContent>
+			<Text text="User:"/><Text text="{context>/userName}"/>
+			<Button icon="sap-icon://action" text="Logout" tooltip="Logout" press="onLogout"/>
+		</headerContent>
+		-->
+		
+		<customHeader>
+			<Bar>
+		    	<contentLeft>
+		     		<Image
+					 src="img/logo_ittumi.jpg">
+					</Image>
+		    	</contentLeft>
+		    	<contentMiddle>
+		     		<Label text="Lauchpad Comprobación Gastos"></Label>
+		    	</contentMiddle>
+		    	<contentRight>
+		     		<Text text="User:"/><Text text="{context>/userName}"/>
+					<Button icon="sap-icon://action" text="Logout" tooltip="Logout" press="onLogout"/>
+		    	</contentRight>
+		    </Bar>
+		</customHeader>
+			
+		<TileContainer id="container" tileDelete="handleTileDelete"
+			tiles="{menu>/TileCollection}">
+			<StandardTile icon="sap-icon://{menu>icon}" type="{menu>type}"
+				number="{menu>number}" numberUnit="{menu>numberUnit}" title="{menu>title}" info="{menu>info}"
+				infoState="{menu>infoState}" press="onPress"/>
+		</TileContainer>
+		<footer>
+			<Toolbar>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>
+
+                

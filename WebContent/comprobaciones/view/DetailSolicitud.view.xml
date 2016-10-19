@@ -1,0 +1,124 @@
+<core:View controllerName="com.ittumi.compgastos.comprobaciones.controller.DetailSolicitud"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:l="sap.ui.layout" xmlns:ui="sap.ca.ui" xmlns="sap.m">
+<!-- 	<Page id="DetailsPage122" navButtonPress="onNavBack" showNavButton="true" title="Detalle Solicitud"> -->
+	<Page id="DetailsPage122" title="Detalle Solicitud">	
+		<content>  		
+			<f:SimpleForm id="solicitudForm" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Datos Solicitud" labelSpanL="4" labelSpanM="2" emptySpanL="1"
+				emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+				<f:content>
+					<!-- row 1 -->
+					<Label text="# Comprobacion"></Label>
+					<Input id="Expenseid" value="{comprobaciones>Expenseid}" enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>															
+					</Input>
+					<Label text="Departamento/Sub">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<Input value="{comprobaciones>Deptxt}/{comprobaciones>Subdeptxt}" enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Centro Coste">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>
+					</Label>
+					<Input value="{comprobaciones>Deptkostl}" enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<!-- row 2 -->
+					<Label text="Creado el"></Label>					
+					<Input id="creadoElBox" value="{path:'comprobaciones>Erdat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+						enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>
+					<Input value="{path:'comprobaciones>Erzet', formatter:'com.ittumi.compgastos.comprobaciones.Formatter.time'}" enabled="false">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Modificado el">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>					
+					<Input value="{path:'comprobaciones>Aedat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+						enabled="false">
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>
+					</Input>	
+					<!-- row 3 -->
+					<Label text="Sociedad"></Label>
+					<ComboBox id="sociedadBox" 
+						items="{path: 'reference>/SociedadList', sorter: {path: 'reference>Butxt', descending: false}}" 
+						selectedKey="{path:'comprobaciones>Bukrs'}" enabled="false">
+						<core:Item id="sociedadBoxItem" key="{reference>Bukrs}" text="{reference>Butxt}"/>
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>	
+					</ComboBox>
+					<Label text="Tipo Documento">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<ComboBox id="tipoDocumentoBox" 
+						items="{path: 'reference>/TipoDocumentoList', sorter: {path: 'reference>Expensedocdesc', descending: false}}" 
+						selectedKey="{path:'comprobaciones>Expensedoc'}" enabled="{helper>/enabled}">
+						<core:Item id="tipoDocumentoBoxItem" key="{reference>Expensedoc}" text="{reference>Expensedocdesc}"/>
+						<layoutData>
+							<l:GridData span="L2 M1 S4" />
+						</layoutData>	
+					</ComboBox>
+					<Label text="Fecha Solicitud">
+						<layoutData>
+							<l:GridData span="L1 M1 S4" />
+						</layoutData>					
+					</Label>
+					<DatePicker id="fechaSolicitudBox" value="{path:'comprobaciones>Reqexpdat', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true, UTC: true}}"
+					 enabled="{helper>/enabled}">			
+						<layoutData>
+							<l:GridData span="L2 M2 S4" />
+						</layoutData>					
+					</DatePicker>
+					<Label text=""></Label>
+					<TextArea id="comment" value="{comprobaciones>Comment}" rows="8" enabled="{helper>/enabled}">
+						<layoutData>
+							<l:GridData span="L8 M8 S4" />
+						</layoutData>						
+					</TextArea>					
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button type="Default" text="Grabar" press="saveSolicitud" visible="{helper>/enabled}">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Salir" press="exitSolicitud">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

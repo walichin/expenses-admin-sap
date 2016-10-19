@@ -1,0 +1,286 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="com.ittumi.compgastos.comprobaciones.controller.ModifyComprobacion" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:l="sap.ui.layout" xmlns:ui="sap.ca.ui">
+	<Page id="">
+		<customHeader>
+			<Bar design="SubHeader">
+				<contentLeft>
+					<Button icon="sap-icon://nav-back" press="onNavBack"/>
+				</contentLeft>
+				<contentMiddle>
+					<Text text="Comprobación Gastos"/>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<subHeader>
+			<Bar design="Header">
+				<contentMiddle>
+					<Text id="DtItemCmp1" text="Detalle Item 0000000451 - 0001"/>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<content>
+
+			<IconTabBar id="idIconTabBarModfComp"
+				select="OnPressIconTabBar"
+				backgroundDesign="Transparent">
+				<items>
+					<IconTabFilter
+						icon="sap-icon://sales-quote"
+						text="Gastos"
+						key="d1">
+						<content>
+						<Label text="Datos Gasto" design="Bold"/>
+						<f:SimpleForm minWidth="1024"
+							maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+							labelSpanL="2" labelSpanM="2" emptySpanL="1"
+							emptySpanM="1" columnsL="1" columnsM="1">
+								<Label text="Tipo Comprobante" />
+								<Select id="idComExpensetype" selectedKey="{mDetItem>/temp_DetailItem/Expensetype}"
+										items="{path: 'mCombos>/TipoGastoList', sorter: {path: 'mCombos>FixedValued', descending: false}}" >
+									<items>
+										<core:Item key="{mCombos>FixedValued}" text="{mCombos>FixedValued} {mCombos>DescText}"/>
+									</items>	
+								</Select>
+								<Label text="Clase Gasto" />
+								<Input id="idInpExpenseclassdes" value="{mDetItem>/temp_DetailItem/Expenseclass} {mDetItem>/temp_DetailItem/Expenseclassdes}"
+										showValueHelp="true" valueHelpRequest="onPressListClass">
+								</Input>
+								<Label text="Cantidad">
+								</Label>
+								<Input id="idInpExpenquan" value="{mDetItem>/temp_DetailItem/Expenquan}"
+										textDirection="RTL">
+								</Input>
+								<Label text="Unidad Medida">										
+								</Label>
+								<ComboBox id="idComUnidadMedida" items="{path: 'mCombos>/UnidadMedidaList', sorter: {path: 'mCombos>Mseh3', descending: false}}" 
+								 selectedKey="{mDetItem>/temp_DetailItem/Unit}">
+									<items>
+											<core:Item key="{mCombos>Mseh3}" text="{mCombos>Ltext}"/>
+									</items>
+								</ComboBox>
+								<Label text="Forma Pago" />
+								<Select id="idComPaymet" selectedKey="{mDetItem>/temp_DetailItem/Paymet}"
+										items="{path: 'mCombos>/MetodPagoList', sorter: {path: 'mCombos>Paymet', descending: false}}" >
+									<items>
+										<core:Item key="{mCombos>Paymet}" text="{mCombos>Paymet} {mCombos>Paymetdes}"/>
+									</items>					
+								</Select>
+								<Label text="Importe" />
+								<Input id="idInpImporte" value="{mDetItem>/temp_DetailItem/Wrbtr}"
+										textDirection="RTL">
+								</Input>
+								<Label text="Moneda" />
+								<!--
+								<Select selectedKey="{mDetItem>/temp_DetailItem/Waers}"
+										items="{path: 'mCombos>/MonedasList', sorter: {path: 'mCombos>Waers', descending: false}}" >
+									<items>
+										<core:Item key="{mCombos>Waers}" text="{mCombos>Ltext}"/>
+									</items>	
+								</Select>
+								-->
+								<Input id="idInpMoneda" value="{mDetItem>/temp_DetailItem/Waers}"
+										showValueHelp="true" valueHelpRequest="onPressListCoins">
+								</Input>
+								<Label text="Ind. Impuesto" />
+								<Select id="idComIndImpuesto" selectedKey="{mDetItem>/temp_DetailItem/Mwskz}"
+										items="{path: 'mCombos>/IndImpuestoList', sorter: {path: 'mCombos>Mwskz', descending: false}}" >
+									<items>
+										<core:Item key="{mCombos>Mwskz}" text="{mCombos>Mwskz} {mCombos>Text1}"/>
+									</items>	
+								</Select>
+								<Label text="Tipo de Cambio" />
+								<Input id="idInpTipoCambio" value="{mDetItem>/temp_DetailItem/Kursf}"
+										textDirection="RTL" enabled="false">
+								</Input>
+								<Label text="Fecha Comprobante" />
+								<DatePicker id="idDatFechaComprobante" value="{ path: 'mDetItem>/temp_DetailItem/Bldat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC:'true' }}">				
+								</DatePicker>
+						</f:SimpleForm>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter
+						icon="sap-icon://accounting-document-verification"
+						text="Contabilidad"
+						key="d2">
+						<Label text="Datos Contables" design="Bold"/>
+						<Table mode="SingleSelectLeft" id="idTableContab"
+						    items="{mContGast>/temp_Cont}"
+							includeItemInSelection="true">
+							<headerToolbar>
+								<Toolbar>
+									<Title id="idHeaderTableContab" text="Items (2)" level="H2"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="2.5em" hAlign="Center">
+									<header><Label text="Linea"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Cuenta Mayor"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Descripción Cuenta Mayor"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Importe Base"/></header>
+								</Column>
+								<Column>
+									<header><Label text="IndImp"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Importe Impuesto"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Texto"/></header>
+								</Column>
+							</columns>
+							<items>
+					            <ColumnListItem>
+					                <cells>
+				                         <Text text="{mContGast>Accolin}" />
+				                         <Text text="{mContGast>Hkont}"/>
+				                         <Text text="{mContGast>Txt20}" />
+				                         <Text text="{mContGast>Wrbtr}" />
+				                         <Text text="{mContGast>Mwskz}" />
+				                         <Text text="{mContGast>Wmwst}" />
+				                         <Text text="{mContGast>Sgtxt}" />
+				                    </cells>
+					            </ColumnListItem>
+							</items>
+						</Table>
+						<Button id="id_d2_Adicionar" text="Adicionar" icon="sap-icon://add" press="onPressAddDatCon"/><!-- top: 200px; -->
+						<Text width="10px"/>
+						<Button id="id_d2_Eliminar" text="Eliminar" icon="sap-icon://delete" press="onPressDelDatCon"/>
+						<Text width="10px"/>
+						<Button id="id_d2_Mofificar" text="Modificar" icon="sap-icon://edit" press="onPressModDatCon" />
+						<Text width="10px"/>
+						<Button id="id_d2_Grabar" text="Grabar" icon="sap-icon://save" press="onPressSaveContab"/>
+					</IconTabFilter>
+					<IconTabFilter
+						icon="sap-icon://org-chart"
+						text="Centro Coste"
+						key="d3">
+						<Label text="Distribución Centros Costo" design="Bold"/>
+						<Table mode="SingleSelectLeft" id="idTableCeCo"
+							items="{mCeCoGast>/temp_CeCo}"
+							includeItemInSelection="true">
+							<headerToolbar>
+								<Toolbar>
+									<Title id="idHeaderTableCeCo" text="Items (2)" level="H2"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="2.5em" hAlign="Center">
+									<header><Label text="Linea"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Centro Coste"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Descripción Centro Coste"/></header>
+								</Column>
+								<Column>
+									<header><Label text="% Dis"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Importe Base"/></header>
+								</Column>
+							</columns>
+							<items>
+					            <ColumnListItem>
+					                <cells>
+				                         <Text text="{mCeCoGast>Distlin}" />
+				                         <Text text="{mCeCoGast>Kostl}"/>
+				                         <Text text="{mCeCoGast>KostlDesc}" />
+				                         <Text text="{mCeCoGast>CostPercent}" />
+				                         <Text text="{mCeCoGast>Appdmbtr}" />
+				                    </cells>
+					            </ColumnListItem>
+							</items>
+						</Table>
+						<Button id="id_d3_Adicionar" text="Adicionar" icon="sap-icon://add" press="onPressAddCeCo"/> <!-- top: 200px; -->
+						<Text width="10px"/>
+						<Button id="id_d3_Eliminar" text="Eliminar" icon="sap-icon://delete" press="onPressDelCeCo"/>
+						<Text width="10px"/>
+						<Button id="id_d3_Iguales" text="%Iguales" press="onPressIgualesCeCo"/> <!-- top: 200px; -->
+						<Text width="10px"/>
+						<Button id="id_d3_Mofificar" text="Modificar" icon="sap-icon://edit" press="onPressModCeCo" />
+						<Text width="10px"/>
+						<Button id="id_d3_Grabar" text="Grabar" icon="sap-icon://save" press="onPressSaveCeCo"/>
+					</IconTabFilter>
+					<IconTabFilter
+						icon="sap-icon://attachment"
+						text="XML/PDF"
+						key="d4">
+						<Label text="XML/PDF Adjuntos" design="Bold"/>
+						<Table mode="SingleSelectLeft" id="idTableDoc"
+							items="{mAttachments>/temp_Adjuntos}"
+							includeItemInSelection="true">
+							<headerToolbar>
+								<Toolbar>
+									<Title id="idHeaderTableAttach" text="Items (0)" level="H2"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="2em">
+									<header><Label text="Tipo"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Nombre"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Creado el"/></header>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Image
+											src="{path: 'mAttachments>Mimetype', formatter: 'util.Formatter.imgXmlPdf'}">
+										</Image>
+										<Link text="{mAttachments>FileName}" press="onPressHrefDoc"/>
+										<Text text= "{mAttachments>Created_at}"  />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<Button id="id_d4_Adicionar" text="Adicionar" icon="sap-icon://add" press="onPressAddDoc"/> <!-- top: 200px; -->
+						<Text width="10px"/>
+						<Button id="id_d4_Eliminar" text="Eliminar Documento" press="onPressDelDoc"/> <!-- top: 200px; -->
+					</IconTabFilter>
+					<!--
+					<IconTabFilter
+						icon="sap-icon://message-information"
+						text="General"
+						key="d5">
+						<Label text="Información General" design="Bold"/>
+						<f:SimpleForm minWidth="1024"
+							maxContainerCols="2" editable="true">
+								<Text text=" " />
+						</f:SimpleForm>
+					</IconTabFilter>
+					-->
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button id="idButSave" type="Default" text="Grabar" press="onPressModifyComprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+				<Button type="Default" text="Salir" press="exitModifyComprobacion">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="false" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

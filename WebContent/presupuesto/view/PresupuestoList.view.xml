@@ -1,0 +1,92 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:c="sap.ui.core" controllerName="com.ittumi.compgastos.presupuesto.controller.PresupuestoList"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showHeader="true" enableScrolling="true" title="Consulta Presupuesto"
+		showNavButton="true" navButtonPress="onNavBack" >
+		<headerContent>
+			<Text text="User:"/><Text text="{context>/userName}"/>
+			<Button icon="sap-icon://action" text="Logout" tooltip="Logout" press="onLogout"/>
+		</headerContent>		
+		<content>
+		<fb:FilterBar id ="myFilterBar" reset="onReset" search="onSearch" filterBarExpanded="false">
+			<fb:filterItems>
+				<fb:FilterItem name="sucursalFilter" label="Sucursal">
+					<fb:control>
+						<ComboBox id="sucursalBox" 
+							items="{path: 'reference>/SucursalList', sorter: {path: 'reference>Deptdesc', descending: false}}">
+							<core:Item id="sucursalBoxItem" key="{reference>Deptcode}" text="{reference>Deptdesc}"/>
+						</ComboBox>
+					</fb:control>			
+				</fb:FilterItem>	
+			</fb:filterItems>
+		</fb:FilterBar>
+	    <Table 
+	     noDataText="No Data" 
+	     id="PresupuestoListTable"
+	     headerText="" footerText="" items="{presupuesto>/ListBudgetBranchOfficeSet}" 
+	     growing="true" growingScrollToLoad="false" class="navTableControlLayout" growingThreshold="10">
+        <items>
+            <ColumnListItem counter="0" id="__item0" press="modificarAnticipo">
+                <cells>
+                    <Text text="{presupuesto>Hkont}" maxLines="0" id="__text0"/>
+                    <Text text="{presupuesto>Txt20}" maxLines="0" id="__text1"/>
+                    <Text text="{presupuesto>Prctr}" maxLines="0" id="__text2"/>
+					<Text text="{presupuesto>Ktext}" maxLines="0" id="__text3"/>
+					<Text text="{ path: 'presupuesto>Dmbtr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.' }}" maxLines="0" id="__text4"/>
+					<Text text="{ path: 'presupuesto>Reaamo', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.' }}" maxLines="0" id="__text5"/>
+					<Text text="{ path: 'presupuesto>Plaamo', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.' }}" maxLines="0" id="__text6"/>
+					<Text text="{ path: 'presupuesto>Avaamo', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, groupingSeparator:',', decimalSeparator:'.' }}" maxLines="0" id="__text7"/>
+				</cells>
+            </ColumnListItem>
+        </items>
+        <columns>
+            <Column width="auto" id="__column0">
+                <header>
+                    <Label text="Cuenta" id="__label0"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column1">
+                <header>
+                    <Label text="Descripción Cuenta" id="__label1"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column2">
+                <header>
+                    <Label text="CeBe" id="__label2"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column3">
+                <header>
+                    <Label text="Descripción CeBe" id="__label3"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column4">
+                <header>
+                    <Label text="Base ML" id="__label4"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column5">
+                <header>
+                    <Label text="Presupuesto ML" id="__label5"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column6">
+                <header>
+                    <Label text="Real ML" id="__label6"/>
+                </header>
+            </Column>
+            <Column width="auto" id="__column7">
+                <header>
+                    <Label text="Disponible ML" id="__label7"/>
+                </header>
+            </Column>
+            </columns></Table>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>
